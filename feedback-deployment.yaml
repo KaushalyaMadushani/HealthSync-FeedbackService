@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feedback-service
+  labels:
+    app: feedback-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: feedback-service
+  template:
+    metadata:
+      labels:
+        app: feedback-service
+    spec:
+      containers:
+        - name: app
+          image: gcr.io/healthsync-444908/feedback-service-image:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb+srv://kaushalya20240321:UfYI8TLMUYhQGAMm@healthsync.0xamq.mongodb.net/?retryWrites=true&w=majority
+
+
